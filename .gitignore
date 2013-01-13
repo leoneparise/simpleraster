@@ -1,0 +1,13 @@
+*.iml
+.idea
+.idea_modules
+.settings
+.classpath
+.project
+.target
+.cache
+.cache
+.DS_Store
+bin
+target
+logs
