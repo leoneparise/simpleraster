@@ -7,6 +7,8 @@ object SebalBuild extends Build {
 
     name := "raster",
 
+    version := "1.0-SNAPSHOT",
+
     scalaVersion := "2.10.0",
 
     scalacOptions ++= Seq("-deprecation", "-unchecked", "-optimize"),
