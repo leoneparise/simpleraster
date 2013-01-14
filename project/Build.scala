@@ -1,7 +1,7 @@
 import sbt._
 import sbt.Keys._
 
-object SebalBuild extends Build {
+object RasterBuild extends Build {
   lazy val project = Project("raster", file(".")) settings(
     organization := "br.com.climadata",
 
@@ -12,8 +12,6 @@ object SebalBuild extends Build {
     scalaVersion := "2.10.0",
 
     scalacOptions ++= Seq("-deprecation", "-unchecked", "-optimize"),
-
-    parallelExecution := false,
 
     libraryDependencies ++= Seq(
       "org.specs2" %% "specs2" % "1.13" % "test"
