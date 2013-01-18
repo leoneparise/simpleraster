@@ -11,9 +11,10 @@ object RasterBuild extends Build {
 
     scalaVersion := "2.10.0",
 
-    scalacOptions ++= Seq("-deprecation", "-unchecked", "-optimize"),
+    scalacOptions ++= Seq("-deprecation", "-unchecked", "-optimize", "-feature"),
 
     libraryDependencies ++= Seq(
+      "org.scala-lang" % "scala-reflect" % "2.10.0",
       "org.specs2" %% "specs2" % "1.13" % "test"
     ),
 
