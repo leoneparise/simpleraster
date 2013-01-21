@@ -2,7 +2,7 @@ package climadata.raster
 
 import scala.language.implicitConversions
 
-trait ResultType[A, B, R] {
+trait ResultType[@specialized A, @specialized B, @specialized R] {
   def convertA(r:Raster[A])(implicit b:RasterBuilder[A, R]):Raster[R]
   def convertB(r:Raster[B])(implicit b:RasterBuilder[B, R]):Raster[R]
 }

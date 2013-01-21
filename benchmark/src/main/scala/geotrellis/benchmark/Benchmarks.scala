@@ -103,7 +103,7 @@ class WhileLoopBenchmark extends CompareBenchmark {
       var col = 0
       while(col < cols) {
         val z = r(col,row)
-        if (z != NODATA) a = r(col,row) * 2
+        if (!climadata.RasterUtils.isNodata(z)) a = r(col,row) * 2
         col += 1
       }
       row += 1
@@ -139,7 +139,7 @@ class WhileLoopBenchmark extends CompareBenchmark {
       var col = 0
       while(col < cols) {
         val z = r(col,row)
-        if (z != NODATA) a = r(col,row) * 2
+        if (!climadata.RasterUtils.isNodata(z)) a = r(col,row) * 2
         col += 1
       }
       row += 1
@@ -175,7 +175,7 @@ class WhileLoopBenchmark extends CompareBenchmark {
       var col = 0
       while(col < cols) {
         val z = r(col,row)
-        if (z != NODATA) a = r(col,row) * 2
+        if (!climadata.RasterUtils.isNodata(z)) a = r(col,row) * 2
         col += 1
       }
       row += 1
@@ -193,7 +193,7 @@ class WhileLoopBenchmark extends CompareBenchmark {
       var col = 0
       while(col < cols) {
         val z = r.getDouble(col,row)
-        if (z != NODATA) a = r.getDouble(col,row) * 2
+        if (!z.isNaN) a = r.getDouble(col,row) * 2
         col += 1
       }
       row += 1
@@ -211,7 +211,7 @@ class WhileLoopBenchmark extends CompareBenchmark {
       var col = 0
       while(col < cols) {
         val z = r(col,row)
-        if (z != NODATA) a = r(col,row) * 2
+        if (!climadata.RasterUtils.isNodata(z)) a = r(col,row) * 2
         col += 1
       }
       row += 1
@@ -229,7 +229,7 @@ class WhileLoopBenchmark extends CompareBenchmark {
       var col = 0
       while(col < cols) {
         val z = r.getDouble(col,row)
-        if (z != NODATA) a = r.getDouble(col,row) * 2
+        if (!z.isNaN) a = r.getDouble(col,row) * 2
         col += 1
       }
       row += 1
@@ -247,7 +247,7 @@ class WhileLoopBenchmark extends CompareBenchmark {
       var col = 0
       while(col < cols) {
         val z = r(col,row)
-        if (z != NODATA) a = r(col,row) * 2
+        if (!climadata.RasterUtils.isNodata(z)) a = r(col,row) * 2
         col += 1
       }
       row += 1

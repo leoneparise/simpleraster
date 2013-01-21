@@ -2,23 +2,23 @@ package climadata.raster
 
 import scala.language.implicitConversions
 
-trait Operation[T] {
+trait Operation[@specialized T] {
   def handle(a:T, b:T):T
 }
 
-trait Sum[T] extends Operation[T]
+trait Sum[@specialized T] extends Operation[T]
 
-trait Sub[T] extends Operation[T]
+trait Sub[@specialized T] extends Operation[T]
 
-trait Multiply[T] extends Operation[T]
+trait Multiply[@specialized T] extends Operation[T]
 
-trait Divide[T] extends Operation[T]
+trait Divide[@specialized T] extends Operation[T]
 
-trait Modulus[T] extends Operation[T]
+trait Modulus[@specialized T] extends Operation[T]
 
-trait And[T] extends Operation[T]
+trait And[@specialized T] extends Operation[T]
 
-trait Or[T] extends Operation[T]
+trait Or[@specialized T] extends Operation[T]
 
 
 trait Operations {
