@@ -1,6 +1,5 @@
 package climadata.raster
 
-import scala.reflect.{ClassTag}
 import scala.language.implicitConversions
 
 object RasterUtils {

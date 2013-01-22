@@ -15,7 +15,8 @@ object RasterBuild extends Build {
 
     libraryDependencies ++= Seq(
       "org.scala-lang" % "scala-reflect" % "2.10.0",
-      "org.specs2" %% "specs2" % "1.13" % "test"
+      "org.specs2" %% "specs2" % "1.13" % "test",
+      "org.apache.commons" % "commons-math3" % "3.1.1"
     ),
 
     resolvers ++= Seq(

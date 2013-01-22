@@ -1,6 +1,5 @@
 package climadata.raster
 
-import scala.reflect._
 import scala.language.implicitConversions
 
 object Raster {
@@ -50,6 +49,8 @@ trait Raster[@specialized T] {
 
   def combine(raster:Raster[T])(f: (T, T) => T)(implicit b:RasterBuilder[T, T]):Raster[T]
 
+  def foldLeft[B](a0: B)(f: (B, T) => B)(implicit b:RasterBuilder[T, B]):B
+
   def +[B, R](raster:Raster[B])(implicit r:ResultType[T, B, R], b1:RasterBuilder[B, R], b2:RasterBuilder[T, R], b3:RasterBuilder[R, R], op:Sum[R]):Raster[R] =
     r.convertA(this).combine(r.convertB(raster))(op.handle)
 
@@ -89,6 +90,9 @@ class ByteRaster(val data:Array[Byte], val cols:Int, val rows:Int) extends Raste
 
     Raster(array, rows, cols)
   }
+
+  def foldLeft[B](a0: B)(f: (B, Byte) => B)(implicit b:RasterBuilder[Byte, B]):B =
+    data.foldLeft(a0)((a, e) => if(b.isNodata(e)) a else f(a, e))
 }
 
 class ShortRaster(val data:Array[Short], val cols:Int, val rows:Int) extends Raster[Short] {
@@ -108,6 +112,9 @@ class ShortRaster(val data:Array[Short], val cols:Int, val rows:Int) extends Ras
 
     Raster(array, rows, cols)
   }
+
+  def foldLeft[B](a0: B)(f: (B, Short) => B)(implicit b:RasterBuilder[Short, B]):B =
+    data.foldLeft(a0)((a, e) => if(b.isNodata(e)) a else f(a, e))
 }
 
 class IntRaster(val data:Array[Int], val cols:Int, val rows:Int) extends Raster[Int] {
@@ -127,6 +134,9 @@ class IntRaster(val data:Array[Int], val cols:Int, val rows:Int) extends Raster[
 
     Raster(array, rows, cols)
   }
+
+  def foldLeft[B](a0: B)(f: (B, Int) => B)(implicit b:RasterBuilder[Int, B]):B =
+    data.foldLeft(a0)((a, e) => if(b.isNodata(e)) a else f(a, e))
 }
 
 class FloatRaster(val data:Array[Float], val cols:Int, val rows:Int) extends Raster[Float] {
@@ -146,6 +156,9 @@ class FloatRaster(val data:Array[Float], val cols:Int, val rows:Int) extends Ras
 
     Raster(array, rows, cols)
   }
+
+  def foldLeft[B](a0: B)(f: (B, Float) => B)(implicit b:RasterBuilder[Float, B]):B =
+    data.foldLeft(a0)((a, e) => if(b.isNodata(e)) a else f(a, e))
 }
 
 class DoubleRaster(val data:Array[Double], val cols:Int, val rows:Int) extends Raster[Double] {
@@ -165,4 +178,7 @@ class DoubleRaster(val data:Array[Double], val cols:Int, val rows:Int) extends R
 
     Raster(array, rows, cols)
   }
+
+  def foldLeft[B](a0: B)(f: (B, Double) => B)(implicit b:RasterBuilder[Double, B]):B =
+    data.foldLeft(a0)((a, e) => if(b.isNodata(e)) a else f(a, e))
 }
