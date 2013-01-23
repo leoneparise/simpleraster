@@ -26,6 +26,9 @@ class ByteConstantRaster(val const:Byte) extends ConstantRaster[Byte] {
 
     Raster(array, raster.rows, raster.cols)
   }
+
+  def foldLeft[B](a0: B)(f: (B, Byte) => B)(implicit b:RasterBuilder[Byte, B]):B =
+    data.foldLeft(a0)((a, e) => if(b.isNodata(e)) a else f(a, e))
 }
 
 class ShortConstantRaster(val const:Short) extends ConstantRaster[Short] {
@@ -47,6 +50,9 @@ class ShortConstantRaster(val const:Short) extends ConstantRaster[Short] {
 
     Raster(array, raster.rows, raster.cols)
   }
+
+  def foldLeft[B](a0: B)(f: (B, Short) => B)(implicit b:RasterBuilder[Short, B]):B =
+    data.foldLeft(a0)((a, e) => if(b.isNodata(e)) a else f(a, e))
 }
 
 class IntConstantRaster(val const:Int) extends ConstantRaster[Int] {
@@ -68,6 +74,9 @@ class IntConstantRaster(val const:Int) extends ConstantRaster[Int] {
 
     Raster(array, raster.rows, raster.cols)
   }
+
+  def foldLeft[B](a0: B)(f: (B, Int) => B)(implicit b:RasterBuilder[Int, B]):B =
+    data.foldLeft(a0)((a, e) => if(b.isNodata(e)) a else f(a, e))
 }
 
 class FloatConstantRaster(val const:Float) extends ConstantRaster[Float] {
@@ -89,6 +98,9 @@ class FloatConstantRaster(val const:Float) extends ConstantRaster[Float] {
 
     Raster(array, raster.rows, raster.cols)
   }
+
+  def foldLeft[B](a0: B)(f: (B, Float) => B)(implicit b:RasterBuilder[Float, B]):B =
+    data.foldLeft(a0)((a, e) => if(b.isNodata(e)) a else f(a, e))
 }
 
 class DoubleConstantRaster(val const:Double) extends ConstantRaster[Double] {
@@ -110,4 +122,7 @@ class DoubleConstantRaster(val const:Double) extends ConstantRaster[Double] {
 
     Raster(array, raster.rows, raster.cols)
   }
+
+  def foldLeft[B](a0: B)(f: (B, Double) => B)(implicit b:RasterBuilder[Double, B]):B =
+    data.foldLeft(a0)((a, e) => if(b.isNodata(e)) a else f(a, e))
 }
