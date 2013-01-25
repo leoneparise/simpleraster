@@ -62,6 +62,18 @@ object FloatRasterSpec extends Specification {
 
       (res must beAnInstanceOf[Raster[Double]]) and (res(0,0) must beEqualTo(0.5))
     }
+
+    "negate" in new rasterScope {
+      val res = -raster
+
+      (res must beAnInstanceOf[Raster[Float]]) and (res(0,0) must beEqualTo(-1.0f))
+    }
+
+    "invert" in new rasterScope {
+      val res = ~raster
+
+      (res must beAnInstanceOf[Raster[Double]]) and (res(0,1) must beEqualTo(0.5))
+    }
   }
 
   "Float constant" should {

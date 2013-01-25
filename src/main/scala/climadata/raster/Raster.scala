@@ -71,6 +71,10 @@ trait Raster[@specialized T] {
 
   def |[B, R](raster:Raster[B])(implicit r:ResultType[T, B, R], b1:RasterBuilder[B, R], b2:RasterBuilder[T, R], b3:RasterBuilder[R, R], op:Or[R]):Raster[R] =
     r.convertA(this).combine(r.convertB(raster))(op.handle)
+
+  def unary_-(implicit b:RasterBuilder[T, T]):Raster[T]
+
+  def unary_~(implicit b:RasterBuilder[T, Double]):Raster[Double]
 }
 
 class ByteRaster(val data:Array[Byte], val cols:Int, val rows:Int) extends Raster[Byte] {
@@ -93,6 +97,10 @@ class ByteRaster(val data:Array[Byte], val cols:Int, val rows:Int) extends Raste
 
   def foldLeft[B](a0: B)(f: (B, Byte) => B)(implicit b:RasterBuilder[Byte, B]):B =
     data.foldLeft(a0)((a, e) => if(b.isNodata(e)) a else f(a, e))
+
+  def unary_-(implicit b:RasterBuilder[Byte, Byte]) = map(e => (-e).toByte)
+
+  def unary_~(implicit b:RasterBuilder[Byte, Double]) = map(e => 1.0/e)
 }
 
 class ShortRaster(val data:Array[Short], val cols:Int, val rows:Int) extends Raster[Short] {
@@ -115,6 +123,10 @@ class ShortRaster(val data:Array[Short], val cols:Int, val rows:Int) extends Ras
 
   def foldLeft[B](a0: B)(f: (B, Short) => B)(implicit b:RasterBuilder[Short, B]):B =
     data.foldLeft(a0)((a, e) => if(b.isNodata(e)) a else f(a, e))
+
+  def unary_-(implicit b:RasterBuilder[Short, Short]) = map(e => (-e).toShort)
+
+  def unary_~(implicit b:RasterBuilder[Short, Double]) = map(e => 1.0/e)
 }
 
 class IntRaster(val data:Array[Int], val cols:Int, val rows:Int) extends Raster[Int] {
@@ -137,6 +149,10 @@ class IntRaster(val data:Array[Int], val cols:Int, val rows:Int) extends Raster[
 
   def foldLeft[B](a0: B)(f: (B, Int) => B)(implicit b:RasterBuilder[Int, B]):B =
     data.foldLeft(a0)((a, e) => if(b.isNodata(e)) a else f(a, e))
+
+  def unary_-(implicit b:RasterBuilder[Int, Int]) = map(e => -e)
+
+  def unary_~(implicit b:RasterBuilder[Int, Double]) = map(e => 1.0/e)
 }
 
 class FloatRaster(val data:Array[Float], val cols:Int, val rows:Int) extends Raster[Float] {
@@ -159,6 +175,10 @@ class FloatRaster(val data:Array[Float], val cols:Int, val rows:Int) extends Ras
 
   def foldLeft[B](a0: B)(f: (B, Float) => B)(implicit b:RasterBuilder[Float, B]):B =
     data.foldLeft(a0)((a, e) => if(b.isNodata(e)) a else f(a, e))
+
+  def unary_-(implicit b:RasterBuilder[Float, Float]) = map(e => -e)
+
+  def unary_~(implicit b:RasterBuilder[Float, Double]) = map(e => 1.0/e)
 }
 
 class DoubleRaster(val data:Array[Double], val cols:Int, val rows:Int) extends Raster[Double] {
@@ -181,4 +201,8 @@ class DoubleRaster(val data:Array[Double], val cols:Int, val rows:Int) extends R
 
   def foldLeft[B](a0: B)(f: (B, Double) => B)(implicit b:RasterBuilder[Double, B]):B =
     data.foldLeft(a0)((a, e) => if(b.isNodata(e)) a else f(a, e))
+
+  def unary_-(implicit b:RasterBuilder[Double, Double]) = map(e => -e)
+
+  def unary_~(implicit b:RasterBuilder[Double, Double]) = map(e => 1.0/e)
 }

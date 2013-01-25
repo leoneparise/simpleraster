@@ -80,6 +80,18 @@ object ShortRasterSpec extends Specification {
 
       (res must beAnInstanceOf[Raster[Double]]) and (res(0,0) must beEqualTo(0.5))
     }
+
+    "negate" in new rasterScope {
+      val res = -raster
+
+      (res must beAnInstanceOf[Raster[Short]]) and (res(0,0) must beEqualTo(-1))
+    }
+
+    "invert" in new rasterScope {
+      val res = ~raster
+
+      (res must beAnInstanceOf[Raster[Double]]) and (res(0,1) must beEqualTo(0.5))
+    }
   }
 
   "Short constant" should {

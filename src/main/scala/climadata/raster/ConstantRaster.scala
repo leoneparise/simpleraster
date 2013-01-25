@@ -29,6 +29,10 @@ class ByteConstantRaster(val const:Byte) extends ConstantRaster[Byte] {
 
   def foldLeft[B](a0: B)(f: (B, Byte) => B)(implicit b:RasterBuilder[Byte, B]):B =
     data.foldLeft(a0)((a, e) => if(b.isNodata(e)) a else f(a, e))
+
+  def unary_-(implicit b:RasterBuilder[Byte, Byte]) = map(e => (-e).toByte)
+
+  def unary_~(implicit b:RasterBuilder[Byte, Double]) = map(e => 1.0/e)
 }
 
 class ShortConstantRaster(val const:Short) extends ConstantRaster[Short] {
@@ -53,6 +57,10 @@ class ShortConstantRaster(val const:Short) extends ConstantRaster[Short] {
 
   def foldLeft[B](a0: B)(f: (B, Short) => B)(implicit b:RasterBuilder[Short, B]):B =
     data.foldLeft(a0)((a, e) => if(b.isNodata(e)) a else f(a, e))
+
+  def unary_-(implicit b:RasterBuilder[Short, Short]) = map(e => (-e).toShort)
+
+  def unary_~(implicit b:RasterBuilder[Short, Double]) = map(e => 1.0/e)
 }
 
 class IntConstantRaster(val const:Int) extends ConstantRaster[Int] {
@@ -77,6 +85,10 @@ class IntConstantRaster(val const:Int) extends ConstantRaster[Int] {
 
   def foldLeft[B](a0: B)(f: (B, Int) => B)(implicit b:RasterBuilder[Int, B]):B =
     data.foldLeft(a0)((a, e) => if(b.isNodata(e)) a else f(a, e))
+
+  def unary_-(implicit b:RasterBuilder[Int, Int]) = map(e => -e)
+
+  def unary_~(implicit b:RasterBuilder[Int, Double]) = map(e => 1.0/e)
 }
 
 class FloatConstantRaster(val const:Float) extends ConstantRaster[Float] {
@@ -101,6 +113,10 @@ class FloatConstantRaster(val const:Float) extends ConstantRaster[Float] {
 
   def foldLeft[B](a0: B)(f: (B, Float) => B)(implicit b:RasterBuilder[Float, B]):B =
     data.foldLeft(a0)((a, e) => if(b.isNodata(e)) a else f(a, e))
+
+  def unary_-(implicit b:RasterBuilder[Float, Float]) = map(e => -e)
+
+  def unary_~(implicit b:RasterBuilder[Float, Double]) = map(e => 1.0/e)
 }
 
 class DoubleConstantRaster(val const:Double) extends ConstantRaster[Double] {
@@ -125,4 +141,8 @@ class DoubleConstantRaster(val const:Double) extends ConstantRaster[Double] {
 
   def foldLeft[B](a0: B)(f: (B, Double) => B)(implicit b:RasterBuilder[Double, B]):B =
     data.foldLeft(a0)((a, e) => if(b.isNodata(e)) a else f(a, e))
+
+  def unary_-(implicit b:RasterBuilder[Double, Double]) = map(e => -e)
+
+  def unary_~(implicit b:RasterBuilder[Double, Double]) = map(e => 1.0/e)
 }

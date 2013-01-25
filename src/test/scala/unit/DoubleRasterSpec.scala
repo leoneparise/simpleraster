@@ -62,6 +62,18 @@ object DoubleRasterSpec extends Specification {
 
       (res must beAnInstanceOf[Raster[Double]]) and (res(0,0) must beEqualTo(0.5))
     }
+
+    "negate" in new rasterScope {
+      val res = -raster
+
+      (res must beAnInstanceOf[Raster[Double]]) and (res(0,0) must beEqualTo(-1.0))
+    }
+
+    "invert" in new rasterScope {
+      val res = ~raster
+
+      (res must beAnInstanceOf[Raster[Double]]) and (res(0,1) must beEqualTo(0.5))
+    }
   }
 
   "Double constant" should {
