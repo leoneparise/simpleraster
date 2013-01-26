@@ -40,12 +40,12 @@ object RasterBuild extends Build {
     javaOptions += "-Xmx8G",
 
     libraryDependencies ++= Seq(
-      "com.azavea" % "geotrellis" % "0.8.0-SNAPSHOT"
-        from "https://bitbucket.org/climadata/raster/downloads/geotrellis.jar",
+      "com.azavea" % "geotrellis" % "0.7.0"
+        from "http://cdn.bitbucket.org/climadata/raster/downloads/geotrellis.jar",
       "com.google.guava" % "guava" % "r09",
       "com.google.code.java-allocation-instrumenter" % "java-allocation-instrumenter" % "2.0",
       "com.google.code.caliper" % "caliper" % "1.0-SNAPSHOT" 
-        from "https://bitbucket.org/climadata/raster/downloads/caliper.jar",
+        from "http://cdn.bitbucket.org/climadata/raster/downloads/caliper.jar",
       "com.google.code.gson" % "gson" % "1.7.1",
       "com.typesafe.akka" %% "akka-kernel" % "2.1.0",
       "com.typesafe.akka" %% "akka-remote" % "2.1.0",
