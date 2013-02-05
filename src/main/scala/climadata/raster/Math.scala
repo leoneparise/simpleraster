@@ -45,4 +45,7 @@ object Math {
 
   def abs(r1:Raster[Double])(implicit i1:DI, i2:DI):Raster[Double] =
     r1.map(scala.math.abs(_))
+
+  def atan(r1:Raster[Double]):Raster[Double] =
+    r1.map(scala.math.atan(_))
 }
