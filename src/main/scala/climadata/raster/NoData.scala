@@ -27,6 +27,6 @@ trait NoDatas {
 
   implicit object doubleNodata extends NoData[Double] {
     def isNodata(d: Double): Boolean = d.isNaN
-    val nodata:Double = Float.NaN
+    val nodata:Double = Double.NaN
   }
 }
