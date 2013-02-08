@@ -3,7 +3,7 @@ package climadata
 import scala.language.implicitConversions
 import scala.reflect.ClassTag
 
-package object raster extends RasterBuilders with ResultTypes with Operations {
+package object raster extends RasterBuilders with ResultTypes with Operations with NoDatas {
   type DI = DummyImplicit
 
   implicit def byte2Raster(const:Byte):Raster[Byte] = Raster(const)
